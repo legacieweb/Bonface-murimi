@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: portfolio-site
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run preview -- --port $PORT
+    envVars:
+      - key: NODE_VERSION
+        value: 18.17.0
+    autoDeploy: true
+    pullRequestPreviewsEnabled: true
