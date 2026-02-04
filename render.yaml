@@ -25,8 +25,7 @@ services:
     routes:
       - type: rewrite
         source: /api/*
-        # Replace this URL with your actual backend URL after the first deployment
-        destination: https://portfolio-api.onrender.com/api/*
+        destination: https://bonfacemurimi.iyonicorp.com/api/*
       - type: rewrite
         source: /*
         destination: /index.html

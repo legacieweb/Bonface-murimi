@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': 'https://bonface-murimi.onrender.com',
+      '/api': 'https://bonfacemurimi.iyonicorp.com',
     },
   },
 })
