@@ -1,11 +1,32 @@
 services:
+  # Backend Service
   - type: web
-    name: portfolio-site
+    name: portfolio-api
     runtime: node
-    buildCommand: npm install && npm run build
-    startCommand: npm run preview -- --port $PORT
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node server.js
     envVars:
       - key: NODE_VERSION
         value: 18.17.0
-    autoDeploy: true
-    pullRequestPreviewsEnabled: true
+      - key: PORT
+        value: 5000
+      - fromGroup: portfolio-secrets
+
+  # Frontend Service
+  - type: static
+    name: portfolio-site
+    runtime: node
+    buildCommand: npm install && npm run build
+    publishPath: ./dist
+    envVars:
+      - key: NODE_VERSION
+        value: 18.17.0
+    routes:
+      - type: rewrite
+        source: /api/*
+        # Replace this URL with your actual backend URL after the first deployment
+        destination: https://portfolio-api.onrender.com/api/*
+      - type: rewrite
+        source: /*
+        destination: /index.html
